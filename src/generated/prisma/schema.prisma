@@ -21,6 +21,8 @@ model user {
   date_of_birth DateTime
   gender        String
   password      String
+  photo_profile String?
+  post          post[]
 }
 
 model like {
@@ -33,6 +35,8 @@ model post {
   date        DateTime
   title       String
   description String
+  userId      Int
+  user        user     @relation(fields: [userId], references: [id])
   photo       String?
 }
 

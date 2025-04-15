@@ -1319,6 +1319,36 @@ export namespace Prisma {
    */
 
 
+  /**
+   * Count Type UserCountOutputType
+   */
+
+  export type UserCountOutputType = {
+    post: number
+  }
+
+  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    post?: boolean | UserCountOutputTypeCountPostArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCountOutputType
+     */
+    select?: UserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountPostArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: postWhereInput
+  }
+
 
   /**
    * Models
@@ -1351,6 +1381,7 @@ export namespace Prisma {
     date_of_birth: Date | null
     gender: string | null
     password: string | null
+    photo_profile: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1360,6 +1391,7 @@ export namespace Prisma {
     date_of_birth: Date | null
     gender: string | null
     password: string | null
+    photo_profile: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1369,6 +1401,7 @@ export namespace Prisma {
     date_of_birth: number
     gender: number
     password: number
+    photo_profile: number
     _all: number
   }
 
@@ -1388,6 +1421,7 @@ export namespace Prisma {
     date_of_birth?: true
     gender?: true
     password?: true
+    photo_profile?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1397,6 +1431,7 @@ export namespace Prisma {
     date_of_birth?: true
     gender?: true
     password?: true
+    photo_profile?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1406,6 +1441,7 @@ export namespace Prisma {
     date_of_birth?: true
     gender?: true
     password?: true
+    photo_profile?: true
     _all?: true
   }
 
@@ -1502,6 +1538,7 @@ export namespace Prisma {
     date_of_birth: Date
     gender: string
     password: string
+    photo_profile: string | null
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -1530,6 +1567,9 @@ export namespace Prisma {
     date_of_birth?: boolean
     gender?: boolean
     password?: boolean
+    photo_profile?: boolean
+    post?: boolean | user$postArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type userSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1539,6 +1579,7 @@ export namespace Prisma {
     date_of_birth?: boolean
     gender?: boolean
     password?: boolean
+    photo_profile?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type userSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1548,6 +1589,7 @@ export namespace Prisma {
     date_of_birth?: boolean
     gender?: boolean
     password?: boolean
+    photo_profile?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type userSelectScalar = {
@@ -1557,13 +1599,22 @@ export namespace Prisma {
     date_of_birth?: boolean
     gender?: boolean
     password?: boolean
+    photo_profile?: boolean
   }
 
-  export type userOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "username" | "date_of_birth" | "gender" | "password", ExtArgs["result"]["user"]>
+  export type userOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "username" | "date_of_birth" | "gender" | "password" | "photo_profile", ExtArgs["result"]["user"]>
+  export type userInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    post?: boolean | user$postArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type userIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type userIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $userPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "user"
-    objects: {}
+    objects: {
+      post: Prisma.$postPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
@@ -1571,6 +1622,7 @@ export namespace Prisma {
       date_of_birth: Date
       gender: string
       password: string
+      photo_profile: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1965,6 +2017,7 @@ export namespace Prisma {
    */
   export interface Prisma__userClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    post<T extends user$postArgs<ExtArgs> = {}>(args?: Subset<T, user$postArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$postPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2000,6 +2053,7 @@ export namespace Prisma {
     readonly date_of_birth: FieldRef<"user", 'DateTime'>
     readonly gender: FieldRef<"user", 'String'>
     readonly password: FieldRef<"user", 'String'>
+    readonly photo_profile: FieldRef<"user", 'String'>
   }
     
 
@@ -2016,6 +2070,10 @@ export namespace Prisma {
      * Omit specific fields from the user
      */
     omit?: userOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userInclude<ExtArgs> | null
     /**
      * Filter, which user to fetch.
      */
@@ -2035,6 +2093,10 @@ export namespace Prisma {
      */
     omit?: userOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userInclude<ExtArgs> | null
+    /**
      * Filter, which user to fetch.
      */
     where: userWhereUniqueInput
@@ -2052,6 +2114,10 @@ export namespace Prisma {
      * Omit specific fields from the user
      */
     omit?: userOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userInclude<ExtArgs> | null
     /**
      * Filter, which user to fetch.
      */
@@ -2101,6 +2167,10 @@ export namespace Prisma {
      */
     omit?: userOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userInclude<ExtArgs> | null
+    /**
      * Filter, which user to fetch.
      */
     where?: userWhereInput
@@ -2149,6 +2219,10 @@ export namespace Prisma {
      */
     omit?: userOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userInclude<ExtArgs> | null
+    /**
      * Filter, which users to fetch.
      */
     where?: userWhereInput
@@ -2191,6 +2265,10 @@ export namespace Prisma {
      * Omit specific fields from the user
      */
     omit?: userOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userInclude<ExtArgs> | null
     /**
      * The data needed to create a user.
      */
@@ -2239,6 +2317,10 @@ export namespace Prisma {
      * Omit specific fields from the user
      */
     omit?: userOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userInclude<ExtArgs> | null
     /**
      * The data needed to update a user.
      */
@@ -2306,6 +2388,10 @@ export namespace Prisma {
      */
     omit?: userOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userInclude<ExtArgs> | null
+    /**
      * The filter to search for the user to update in case it exists.
      */
     where: userWhereUniqueInput
@@ -2332,6 +2418,10 @@ export namespace Prisma {
      */
     omit?: userOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userInclude<ExtArgs> | null
+    /**
      * Filter which user to delete.
      */
     where: userWhereUniqueInput
@@ -2352,6 +2442,30 @@ export namespace Prisma {
   }
 
   /**
+   * user.post
+   */
+  export type user$postArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the post
+     */
+    select?: postSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the post
+     */
+    omit?: postOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: postInclude<ExtArgs> | null
+    where?: postWhereInput
+    orderBy?: postOrderByWithRelationInput | postOrderByWithRelationInput[]
+    cursor?: postWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
+  }
+
+  /**
    * user without action
    */
   export type userDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2363,6 +2477,10 @@ export namespace Prisma {
      * Omit specific fields from the user
      */
     omit?: userOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userInclude<ExtArgs> | null
   }
 
 
@@ -3374,10 +3492,12 @@ export namespace Prisma {
 
   export type PostAvgAggregateOutputType = {
     id: number | null
+    userId: number | null
   }
 
   export type PostSumAggregateOutputType = {
     id: number | null
+    userId: number | null
   }
 
   export type PostMinAggregateOutputType = {
@@ -3385,6 +3505,7 @@ export namespace Prisma {
     date: Date | null
     title: string | null
     description: string | null
+    userId: number | null
     photo: string | null
   }
 
@@ -3393,6 +3514,7 @@ export namespace Prisma {
     date: Date | null
     title: string | null
     description: string | null
+    userId: number | null
     photo: string | null
   }
 
@@ -3401,6 +3523,7 @@ export namespace Prisma {
     date: number
     title: number
     description: number
+    userId: number
     photo: number
     _all: number
   }
@@ -3408,10 +3531,12 @@ export namespace Prisma {
 
   export type PostAvgAggregateInputType = {
     id?: true
+    userId?: true
   }
 
   export type PostSumAggregateInputType = {
     id?: true
+    userId?: true
   }
 
   export type PostMinAggregateInputType = {
@@ -3419,6 +3544,7 @@ export namespace Prisma {
     date?: true
     title?: true
     description?: true
+    userId?: true
     photo?: true
   }
 
@@ -3427,6 +3553,7 @@ export namespace Prisma {
     date?: true
     title?: true
     description?: true
+    userId?: true
     photo?: true
   }
 
@@ -3435,6 +3562,7 @@ export namespace Prisma {
     date?: true
     title?: true
     description?: true
+    userId?: true
     photo?: true
     _all?: true
   }
@@ -3530,6 +3658,7 @@ export namespace Prisma {
     date: Date
     title: string
     description: string
+    userId: number
     photo: string | null
     _count: PostCountAggregateOutputType | null
     _avg: PostAvgAggregateOutputType | null
@@ -3557,7 +3686,9 @@ export namespace Prisma {
     date?: boolean
     title?: boolean
     description?: boolean
+    userId?: boolean
     photo?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["post"]>
 
   export type postSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3565,7 +3696,9 @@ export namespace Prisma {
     date?: boolean
     title?: boolean
     description?: boolean
+    userId?: boolean
     photo?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["post"]>
 
   export type postSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3573,7 +3706,9 @@ export namespace Prisma {
     date?: boolean
     title?: boolean
     description?: boolean
+    userId?: boolean
     photo?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["post"]>
 
   export type postSelectScalar = {
@@ -3581,19 +3716,32 @@ export namespace Prisma {
     date?: boolean
     title?: boolean
     description?: boolean
+    userId?: boolean
     photo?: boolean
   }
 
-  export type postOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "date" | "title" | "description" | "photo", ExtArgs["result"]["post"]>
+  export type postOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "date" | "title" | "description" | "userId" | "photo", ExtArgs["result"]["post"]>
+  export type postInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }
+  export type postIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }
+  export type postIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }
 
   export type $postPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "post"
-    objects: {}
+    objects: {
+      user: Prisma.$userPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       date: Date
       title: string
       description: string
+      userId: number
       photo: string | null
     }, ExtArgs["result"]["post"]>
     composites: {}
@@ -3989,6 +4137,7 @@ export namespace Prisma {
    */
   export interface Prisma__postClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends userDefaultArgs<ExtArgs> = {}>(args?: Subset<T, userDefaultArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4022,6 +4171,7 @@ export namespace Prisma {
     readonly date: FieldRef<"post", 'DateTime'>
     readonly title: FieldRef<"post", 'String'>
     readonly description: FieldRef<"post", 'String'>
+    readonly userId: FieldRef<"post", 'Int'>
     readonly photo: FieldRef<"post", 'String'>
   }
     
@@ -4039,6 +4189,10 @@ export namespace Prisma {
      * Omit specific fields from the post
      */
     omit?: postOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: postInclude<ExtArgs> | null
     /**
      * Filter, which post to fetch.
      */
@@ -4058,6 +4212,10 @@ export namespace Prisma {
      */
     omit?: postOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: postInclude<ExtArgs> | null
+    /**
      * Filter, which post to fetch.
      */
     where: postWhereUniqueInput
@@ -4075,6 +4233,10 @@ export namespace Prisma {
      * Omit specific fields from the post
      */
     omit?: postOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: postInclude<ExtArgs> | null
     /**
      * Filter, which post to fetch.
      */
@@ -4124,6 +4286,10 @@ export namespace Prisma {
      */
     omit?: postOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: postInclude<ExtArgs> | null
+    /**
      * Filter, which post to fetch.
      */
     where?: postWhereInput
@@ -4172,6 +4338,10 @@ export namespace Prisma {
      */
     omit?: postOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: postInclude<ExtArgs> | null
+    /**
      * Filter, which posts to fetch.
      */
     where?: postWhereInput
@@ -4215,6 +4385,10 @@ export namespace Prisma {
      */
     omit?: postOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: postInclude<ExtArgs> | null
+    /**
      * The data needed to create a post.
      */
     data: XOR<postCreateInput, postUncheckedCreateInput>
@@ -4248,6 +4422,10 @@ export namespace Prisma {
      */
     data: postCreateManyInput | postCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: postIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -4262,6 +4440,10 @@ export namespace Prisma {
      * Omit specific fields from the post
      */
     omit?: postOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: postInclude<ExtArgs> | null
     /**
      * The data needed to update a post.
      */
@@ -4314,6 +4496,10 @@ export namespace Prisma {
      * Limit how many posts to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: postIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -4328,6 +4514,10 @@ export namespace Prisma {
      * Omit specific fields from the post
      */
     omit?: postOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: postInclude<ExtArgs> | null
     /**
      * The filter to search for the post to update in case it exists.
      */
@@ -4354,6 +4544,10 @@ export namespace Prisma {
      * Omit specific fields from the post
      */
     omit?: postOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: postInclude<ExtArgs> | null
     /**
      * Filter which post to delete.
      */
@@ -4386,6 +4580,10 @@ export namespace Prisma {
      * Omit specific fields from the post
      */
     omit?: postOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: postInclude<ExtArgs> | null
   }
 
 
@@ -7379,7 +7577,8 @@ export namespace Prisma {
     username: 'username',
     date_of_birth: 'date_of_birth',
     gender: 'gender',
-    password: 'password'
+    password: 'password',
+    photo_profile: 'photo_profile'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -7398,6 +7597,7 @@ export namespace Prisma {
     date: 'date',
     title: 'title',
     description: 'description',
+    userId: 'userId',
     photo: 'photo'
   };
 
@@ -7526,6 +7726,8 @@ export namespace Prisma {
     date_of_birth?: DateTimeFilter<"user"> | Date | string
     gender?: StringFilter<"user"> | string
     password?: StringFilter<"user"> | string
+    photo_profile?: StringNullableFilter<"user"> | string | null
+    post?: PostListRelationFilter
   }
 
   export type userOrderByWithRelationInput = {
@@ -7535,6 +7737,8 @@ export namespace Prisma {
     date_of_birth?: SortOrder
     gender?: SortOrder
     password?: SortOrder
+    photo_profile?: SortOrderInput | SortOrder
+    post?: postOrderByRelationAggregateInput
   }
 
   export type userWhereUniqueInput = Prisma.AtLeast<{
@@ -7547,6 +7751,8 @@ export namespace Prisma {
     date_of_birth?: DateTimeFilter<"user"> | Date | string
     gender?: StringFilter<"user"> | string
     password?: StringFilter<"user"> | string
+    photo_profile?: StringNullableFilter<"user"> | string | null
+    post?: PostListRelationFilter
   }, "id" | "username">
 
   export type userOrderByWithAggregationInput = {
@@ -7556,6 +7762,7 @@ export namespace Prisma {
     date_of_birth?: SortOrder
     gender?: SortOrder
     password?: SortOrder
+    photo_profile?: SortOrderInput | SortOrder
     _count?: userCountOrderByAggregateInput
     _avg?: userAvgOrderByAggregateInput
     _max?: userMaxOrderByAggregateInput
@@ -7573,6 +7780,7 @@ export namespace Prisma {
     date_of_birth?: DateTimeWithAggregatesFilter<"user"> | Date | string
     gender?: StringWithAggregatesFilter<"user"> | string
     password?: StringWithAggregatesFilter<"user"> | string
+    photo_profile?: StringNullableWithAggregatesFilter<"user"> | string | null
   }
 
   export type likeWhereInput = {
@@ -7622,7 +7830,9 @@ export namespace Prisma {
     date?: DateTimeFilter<"post"> | Date | string
     title?: StringFilter<"post"> | string
     description?: StringFilter<"post"> | string
+    userId?: IntFilter<"post"> | number
     photo?: StringNullableFilter<"post"> | string | null
+    user?: XOR<UserScalarRelationFilter, userWhereInput>
   }
 
   export type postOrderByWithRelationInput = {
@@ -7630,7 +7840,9 @@ export namespace Prisma {
     date?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    userId?: SortOrder
     photo?: SortOrderInput | SortOrder
+    user?: userOrderByWithRelationInput
   }
 
   export type postWhereUniqueInput = Prisma.AtLeast<{
@@ -7641,7 +7853,9 @@ export namespace Prisma {
     date?: DateTimeFilter<"post"> | Date | string
     title?: StringFilter<"post"> | string
     description?: StringFilter<"post"> | string
+    userId?: IntFilter<"post"> | number
     photo?: StringNullableFilter<"post"> | string | null
+    user?: XOR<UserScalarRelationFilter, userWhereInput>
   }, "id">
 
   export type postOrderByWithAggregationInput = {
@@ -7649,6 +7863,7 @@ export namespace Prisma {
     date?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    userId?: SortOrder
     photo?: SortOrderInput | SortOrder
     _count?: postCountOrderByAggregateInput
     _avg?: postAvgOrderByAggregateInput
@@ -7665,6 +7880,7 @@ export namespace Prisma {
     date?: DateTimeWithAggregatesFilter<"post"> | Date | string
     title?: StringWithAggregatesFilter<"post"> | string
     description?: StringWithAggregatesFilter<"post"> | string
+    userId?: IntWithAggregatesFilter<"post"> | number
     photo?: StringNullableWithAggregatesFilter<"post"> | string | null
   }
 
@@ -7791,6 +8007,8 @@ export namespace Prisma {
     date_of_birth: Date | string
     gender: string
     password: string
+    photo_profile?: string | null
+    post?: postCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateInput = {
@@ -7800,6 +8018,8 @@ export namespace Prisma {
     date_of_birth: Date | string
     gender: string
     password: string
+    photo_profile?: string | null
+    post?: postUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userUpdateInput = {
@@ -7808,6 +8028,8 @@ export namespace Prisma {
     date_of_birth?: DateTimeFieldUpdateOperationsInput | Date | string
     gender?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    photo_profile?: NullableStringFieldUpdateOperationsInput | string | null
+    post?: postUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateInput = {
@@ -7817,6 +8039,8 @@ export namespace Prisma {
     date_of_birth?: DateTimeFieldUpdateOperationsInput | Date | string
     gender?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    photo_profile?: NullableStringFieldUpdateOperationsInput | string | null
+    post?: postUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type userCreateManyInput = {
@@ -7826,6 +8050,7 @@ export namespace Prisma {
     date_of_birth: Date | string
     gender: string
     password: string
+    photo_profile?: string | null
   }
 
   export type userUpdateManyMutationInput = {
@@ -7834,6 +8059,7 @@ export namespace Prisma {
     date_of_birth?: DateTimeFieldUpdateOperationsInput | Date | string
     gender?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    photo_profile?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type userUncheckedUpdateManyInput = {
@@ -7843,6 +8069,7 @@ export namespace Prisma {
     date_of_birth?: DateTimeFieldUpdateOperationsInput | Date | string
     gender?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    photo_profile?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type likeCreateInput = {
@@ -7882,6 +8109,7 @@ export namespace Prisma {
     title: string
     description: string
     photo?: string | null
+    user: userCreateNestedOneWithoutPostInput
   }
 
   export type postUncheckedCreateInput = {
@@ -7889,6 +8117,7 @@ export namespace Prisma {
     date: Date | string
     title: string
     description: string
+    userId: number
     photo?: string | null
   }
 
@@ -7897,6 +8126,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     photo?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: userUpdateOneRequiredWithoutPostNestedInput
   }
 
   export type postUncheckedUpdateInput = {
@@ -7904,6 +8134,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    userId?: IntFieldUpdateOperationsInput | number
     photo?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -7912,6 +8143,7 @@ export namespace Prisma {
     date: Date | string
     title: string
     description: string
+    userId: number
     photo?: string | null
   }
 
@@ -7927,6 +8159,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    userId?: IntFieldUpdateOperationsInput | number
     photo?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -8063,6 +8296,36 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type PostListRelationFilter = {
+    every?: postWhereInput
+    some?: postWhereInput
+    none?: postWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type postOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type userCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -8070,6 +8333,7 @@ export namespace Prisma {
     date_of_birth?: SortOrder
     gender?: SortOrder
     password?: SortOrder
+    photo_profile?: SortOrder
   }
 
   export type userAvgOrderByAggregateInput = {
@@ -8083,6 +8347,7 @@ export namespace Prisma {
     date_of_birth?: SortOrder
     gender?: SortOrder
     password?: SortOrder
+    photo_profile?: SortOrder
   }
 
   export type userMinOrderByAggregateInput = {
@@ -8092,6 +8357,7 @@ export namespace Prisma {
     date_of_birth?: SortOrder
     gender?: SortOrder
     password?: SortOrder
+    photo_profile?: SortOrder
   }
 
   export type userSumOrderByAggregateInput = {
@@ -8146,6 +8412,24 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type likeCountOrderByAggregateInput = {
     id?: SortOrder
     total?: SortOrder
@@ -8171,24 +8455,9 @@ export namespace Prisma {
     total?: SortOrder
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
+  export type UserScalarRelationFilter = {
+    is?: userWhereInput
+    isNot?: userWhereInput
   }
 
   export type postCountOrderByAggregateInput = {
@@ -8196,11 +8465,13 @@ export namespace Prisma {
     date?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    userId?: SortOrder
     photo?: SortOrder
   }
 
   export type postAvgOrderByAggregateInput = {
     id?: SortOrder
+    userId?: SortOrder
   }
 
   export type postMaxOrderByAggregateInput = {
@@ -8208,6 +8479,7 @@ export namespace Prisma {
     date?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    userId?: SortOrder
     photo?: SortOrder
   }
 
@@ -8216,29 +8488,13 @@ export namespace Prisma {
     date?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    userId?: SortOrder
     photo?: SortOrder
   }
 
   export type postSumOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
+    userId?: SortOrder
   }
 
   export type category_comunityCountOrderByAggregateInput = {
@@ -8310,12 +8566,44 @@ export namespace Prisma {
     id?: SortOrder
   }
 
+  export type postCreateNestedManyWithoutUserInput = {
+    create?: XOR<postCreateWithoutUserInput, postUncheckedCreateWithoutUserInput> | postCreateWithoutUserInput[] | postUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: postCreateOrConnectWithoutUserInput | postCreateOrConnectWithoutUserInput[]
+    createMany?: postCreateManyUserInputEnvelope
+    connect?: postWhereUniqueInput | postWhereUniqueInput[]
+  }
+
+  export type postUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<postCreateWithoutUserInput, postUncheckedCreateWithoutUserInput> | postCreateWithoutUserInput[] | postUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: postCreateOrConnectWithoutUserInput | postCreateOrConnectWithoutUserInput[]
+    createMany?: postCreateManyUserInputEnvelope
+    connect?: postWhereUniqueInput | postWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type postUpdateManyWithoutUserNestedInput = {
+    create?: XOR<postCreateWithoutUserInput, postUncheckedCreateWithoutUserInput> | postCreateWithoutUserInput[] | postUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: postCreateOrConnectWithoutUserInput | postCreateOrConnectWithoutUserInput[]
+    upsert?: postUpsertWithWhereUniqueWithoutUserInput | postUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: postCreateManyUserInputEnvelope
+    set?: postWhereUniqueInput | postWhereUniqueInput[]
+    disconnect?: postWhereUniqueInput | postWhereUniqueInput[]
+    delete?: postWhereUniqueInput | postWhereUniqueInput[]
+    connect?: postWhereUniqueInput | postWhereUniqueInput[]
+    update?: postUpdateWithWhereUniqueWithoutUserInput | postUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: postUpdateManyWithWhereWithoutUserInput | postUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: postScalarWhereInput | postScalarWhereInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -8326,8 +8614,32 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
+  export type postUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<postCreateWithoutUserInput, postUncheckedCreateWithoutUserInput> | postCreateWithoutUserInput[] | postUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: postCreateOrConnectWithoutUserInput | postCreateOrConnectWithoutUserInput[]
+    upsert?: postUpsertWithWhereUniqueWithoutUserInput | postUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: postCreateManyUserInputEnvelope
+    set?: postWhereUniqueInput | postWhereUniqueInput[]
+    disconnect?: postWhereUniqueInput | postWhereUniqueInput[]
+    delete?: postWhereUniqueInput | postWhereUniqueInput[]
+    connect?: postWhereUniqueInput | postWhereUniqueInput[]
+    update?: postUpdateWithWhereUniqueWithoutUserInput | postUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: postUpdateManyWithWhereWithoutUserInput | postUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: postScalarWhereInput | postScalarWhereInput[]
+  }
+
+  export type userCreateNestedOneWithoutPostInput = {
+    create?: XOR<userCreateWithoutPostInput, userUncheckedCreateWithoutPostInput>
+    connectOrCreate?: userCreateOrConnectWithoutPostInput
+    connect?: userWhereUniqueInput
+  }
+
+  export type userUpdateOneRequiredWithoutPostNestedInput = {
+    create?: XOR<userCreateWithoutPostInput, userUncheckedCreateWithoutPostInput>
+    connectOrCreate?: userCreateOrConnectWithoutPostInput
+    upsert?: userUpsertWithoutPostInput
+    connect?: userWhereUniqueInput
+    update?: XOR<XOR<userUpdateToOneWithWhereWithoutPostInput, userUpdateWithoutPostInput>, userUncheckedUpdateWithoutPostInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -8364,6 +8676,20 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -8424,20 +8750,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -8464,6 +8776,144 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type postCreateWithoutUserInput = {
+    date: Date | string
+    title: string
+    description: string
+    photo?: string | null
+  }
+
+  export type postUncheckedCreateWithoutUserInput = {
+    id?: number
+    date: Date | string
+    title: string
+    description: string
+    photo?: string | null
+  }
+
+  export type postCreateOrConnectWithoutUserInput = {
+    where: postWhereUniqueInput
+    create: XOR<postCreateWithoutUserInput, postUncheckedCreateWithoutUserInput>
+  }
+
+  export type postCreateManyUserInputEnvelope = {
+    data: postCreateManyUserInput | postCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type postUpsertWithWhereUniqueWithoutUserInput = {
+    where: postWhereUniqueInput
+    update: XOR<postUpdateWithoutUserInput, postUncheckedUpdateWithoutUserInput>
+    create: XOR<postCreateWithoutUserInput, postUncheckedCreateWithoutUserInput>
+  }
+
+  export type postUpdateWithWhereUniqueWithoutUserInput = {
+    where: postWhereUniqueInput
+    data: XOR<postUpdateWithoutUserInput, postUncheckedUpdateWithoutUserInput>
+  }
+
+  export type postUpdateManyWithWhereWithoutUserInput = {
+    where: postScalarWhereInput
+    data: XOR<postUpdateManyMutationInput, postUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type postScalarWhereInput = {
+    AND?: postScalarWhereInput | postScalarWhereInput[]
+    OR?: postScalarWhereInput[]
+    NOT?: postScalarWhereInput | postScalarWhereInput[]
+    id?: IntFilter<"post"> | number
+    date?: DateTimeFilter<"post"> | Date | string
+    title?: StringFilter<"post"> | string
+    description?: StringFilter<"post"> | string
+    userId?: IntFilter<"post"> | number
+    photo?: StringNullableFilter<"post"> | string | null
+  }
+
+  export type userCreateWithoutPostInput = {
+    name: string
+    username: string
+    date_of_birth: Date | string
+    gender: string
+    password: string
+    photo_profile?: string | null
+  }
+
+  export type userUncheckedCreateWithoutPostInput = {
+    id?: number
+    name: string
+    username: string
+    date_of_birth: Date | string
+    gender: string
+    password: string
+    photo_profile?: string | null
+  }
+
+  export type userCreateOrConnectWithoutPostInput = {
+    where: userWhereUniqueInput
+    create: XOR<userCreateWithoutPostInput, userUncheckedCreateWithoutPostInput>
+  }
+
+  export type userUpsertWithoutPostInput = {
+    update: XOR<userUpdateWithoutPostInput, userUncheckedUpdateWithoutPostInput>
+    create: XOR<userCreateWithoutPostInput, userUncheckedCreateWithoutPostInput>
+    where?: userWhereInput
+  }
+
+  export type userUpdateToOneWithWhereWithoutPostInput = {
+    where?: userWhereInput
+    data: XOR<userUpdateWithoutPostInput, userUncheckedUpdateWithoutPostInput>
+  }
+
+  export type userUpdateWithoutPostInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    date_of_birth?: DateTimeFieldUpdateOperationsInput | Date | string
+    gender?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    photo_profile?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type userUncheckedUpdateWithoutPostInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    date_of_birth?: DateTimeFieldUpdateOperationsInput | Date | string
+    gender?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    photo_profile?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type postCreateManyUserInput = {
+    id?: number
+    date: Date | string
+    title: string
+    description: string
+    photo?: string | null
+  }
+
+  export type postUpdateWithoutUserInput = {
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type postUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type postUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 
